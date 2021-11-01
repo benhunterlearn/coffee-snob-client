@@ -2,6 +2,18 @@
 
 ## The find the snobbiest hipster cafés near you.
 
+# TODO
+
+- [x] Add coffee shops
+  - [x] Update the list of shops with the new one
+- [x] List all the shop from the server
+- [x] View details of a specific shop
+- [ ] Review a shop
+  - [ ] List all the reviews
+  - [ ] Add a new review
+- [ ] Rate a shop
+- [ ] Edit details of a shop
+- [x] Delete a shop
 
 # Getting Started with Create React App
 
