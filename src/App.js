@@ -1,25 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import {ShopList} from "./ShopList";
+import {ShopCreator} from "./ShopCreator";
+import {useEffect, useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API_URL = "http://localhost:8080/shop";
+
+const App = () => {
+    const [shops, setShops] = useState([]);
+
+    // Load all the shops after the first render.
+    useEffect(() => {
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(json => setShops(json));
+    }, []);
+
+    const createShop = (newShop) => {
+        console.log(newShop);
+        fetch(API_URL, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newShop)
+        })
+            .then(response => response.json())
+            .then(json => console.log(json));
+    }
+
+    return (
+        <div>
+            <header>
+                Coffee Snob
+            </header>
+            <ShopCreator
+                createShop={(newShop) => createShop(newShop)}
+            />
+            <ShopList shops={shops}
+            />
+        </div>
+    );
 }
 
 export default App;
